@@ -39,6 +39,7 @@ for mask_string in mask_images:
     # print("Creating csv file:","./"+mask_string.replace(".","/").split("/")[-2]+".csv")
     # distDf.to_csv("./"+mask_string.replace(".","/").split("/")[-2]+".csv",sep=",")
     
+    ### UNCOMMENT ONE OF THE ALTERNATIVES TO SEE THE RESULT
 
     #Alternative 1 : Get max point on the average path (most bright area on path and image)
     # maxes = np.max(distTransform,axis=1)
@@ -52,7 +53,21 @@ for mask_string in mask_images:
     # min_y_ind = np.argmax(distTransform[min_x_ind])
     # cv2.circle(distTransform,(min_y_ind,min_x_ind),10,(255,0,0),-1)
 
+    # Alternative 3: Try to get path accurately by finding max points in every row
+    # aa = np.shape(distTransform)[0]
 
+    # for i in range(0,aa):
+    #     maxed = np.argmax(distTransform[i])
+    #     cv2.circle(distTransform,(maxed,i),3,(0,0,0),-1)
+
+    # Alternative 4: Try to get path accurately by finding max points in every column
+    # aa = np.shape(distTransform)[1]
+
+    # for i in range(0,aa):
+    #     maxed = np.argmax(distTransform[:,i])
+    #     cv2.circle(distTransform,(i,maxed),3,(0,0,0),-1)
+
+    
     #Show and save result image
     img = plt.imshow(distTransform)
     plt.savefig("./distanced_"+mask_string.split("/")[-1])
